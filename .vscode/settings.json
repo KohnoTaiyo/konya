@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": ["source.fixAll"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": ".prettierrc.json",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": ["classcat", "tailwindcss", "precommit"]
+}
