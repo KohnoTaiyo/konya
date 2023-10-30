@@ -4,5 +4,5 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.configPath": ".prettierrc.json",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["classcat", "tailwindcss", "precommit"]
+  "cSpell.words": ["classcat", "tailwindcss", "precommit", "ianvs"]
 }
