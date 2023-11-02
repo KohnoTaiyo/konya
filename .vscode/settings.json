@@ -6,5 +6,5 @@
   "css.validate": false,
   "prettier.configPath": "prettier.config.js",
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["classcat", "tailwindcss", "precommit", "ianvs"]
+  "cSpell.words": ["classcat", "tailwindcss", "precommit", "ianvs", "tabler", "datasource"]
 }
