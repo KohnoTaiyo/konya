@@ -17,6 +17,7 @@ model Admin {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
   users     User[]
+  Event     Event[]
 }
 
 model User {
@@ -27,6 +28,18 @@ model User {
   createdAt DateTime  @default(now())
   updatedAt DateTime? @default(now()) @updatedAt
   image     String?
+
+  @@index([adminId])
+}
+
+model Event {
+  id        Int       @id @default(autoincrement())
+  name      String
+  image     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  admin     Admin     @relation(fields: [adminId], references: [id])
+  adminId   Int
 
   @@index([adminId])
 }
