@@ -7,7 +7,7 @@ import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, { cache: "no-store" });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, { next: { revalidate: 1 } });
   const users: User[] = await res.json();
 
   return (
