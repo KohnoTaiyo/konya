@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write './app/**/*.{js,jsx,ts,tsx}'",
@@ -12,7 +12,8 @@
     "fmt:precommit": "prettier --write './app/**/*.{js,jsx,ts,tsx,json,css,scss}'",
     "prepare": "husky install",
     "db": "prisma format && prisma generate && prisma db push",
-    "studio": "prisma studio"
+    "studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "lint-staged": {
     "app/**/*.{ts,tsx}": "yarn run lint:precommit",
