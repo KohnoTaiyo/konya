@@ -11,10 +11,22 @@ datasource db {
   relationMode = "prisma"
 }
 
+model Admin {
+  id        Int       @id @default(autoincrement())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  users     User[]
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String   @unique
-  name      String?
-  test      String?
+  id        Int       @id @default(autoincrement())
+  name      String
+  admin     Admin     @relation(fields: [adminId], references: [id])
+  adminId   Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @default(now()) @updatedAt
+  image     String?
+
+  @@index([adminId])
 }

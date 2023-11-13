@@ -2,5 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+@layer components {
+  .input-text {
+    @apply border border-gray py-1 px-2 rounded block w-full;
+  }
 }

@@ -6,11 +6,15 @@ const config: Config = {
     fontSize: {
       xLarge: "28px",
       large: "20px",
+      small: "10px",
     },
     colors: {
       primary: "#528126",
       secondary: "#59c959",
       white: "#FFFFFF",
+      lightGray: "#f3f4f6",
+      gray: "#d1d5db",
+      red: "#ff0000",
     },
     extend: {
       backgroundImage: {

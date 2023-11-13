@@ -5,11 +5,11 @@ import { Header } from "@/components/Header/Header";
 export default function Admin() {
   return (
     <div>
-      <Header title="管理画面" backHref="/" />
+      <Header title="管理画面" backHref="/" isHomeIcon />
       <Container>
         <div className="flex justify-between gap-4">
-          <Button text="ユーザー登録" href="admin/user" />
-          <Button text="スケジュール登録" href="admin/schedule" />
+          <Button text="ユーザー編集" href="admin/user" />
+          <Button text="スケジュール編集" href="admin/schedule" />
         </div>
       </Container>
     </div>

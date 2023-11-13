@@ -4,7 +4,7 @@ import { Header } from "@/components/Header/Header";
 export default function AdminSchedule() {
   return (
     <div>
-      <Header title="スケジュール登録画面" backHref="/admin" />
+      <Header title="スケジュール登録画面" backHref="/admin" isHomeIcon />
       <Container>スケジュール登録画面</Container>
     </div>
   );
