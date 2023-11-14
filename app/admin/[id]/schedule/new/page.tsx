@@ -1,12 +1,11 @@
-import { Event } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 import { Container } from "@/components/Container/Container";
 import { ScheduleForm } from "@/components/Form";
 import { Header } from "@/components/Header/Header";
 
 export default async function UserAddSchedule({ params }: { params: { id: string } }) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/event`, { cache: "no-store" });
-  const events: Event[] = await res.json();
+  const events = await prisma.event.findMany();
 
   return (
     <div>

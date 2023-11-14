@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+import { deleteImage } from "@/hooks/deleteImage";
 import { resizeValidateImage } from "@/hooks/resizeValidateImage";
+import { uploadImage } from "@/hooks/uploadImage";
 import { User } from "@prisma/client";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -14,7 +16,7 @@ type UserFormInputs = {
   name: string;
 };
 
-export function UserForm({ user }: { user?: User }) {
+export function UserForm({ user }: { user: User | null }) {
   const [image, setImage] = useState<File>();
   const [imageUrl, setImageUrl] = useState<string>(user?.image || "");
   const [errorMessages, setErrorMessages] = useState<{ image?: string; submit?: string }>();
@@ -54,39 +56,26 @@ export function UserForm({ user }: { user?: User }) {
       let imagePath: string | undefined;
       if (image && isEdit.image) {
         const imageName = crypto.randomUUID();
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/imageUploadUrl`, {
-          method: "POST",
-          body: JSON.stringify({ imageName }),
-        });
-        const { url } = await response.json();
-        await fetch(url, {
-          method: "PUT",
-          body: image,
-          headers: {
-            "Content-Type": image.type,
-          },
-        }).then((res) => {
-          if (!res.ok) {
-            throw new Error();
-          }
+        const res = await uploadImage(image, imageName);
+        if (res.ok) {
           imagePath = `${process.env.NEXT_PUBLIC_R2_IMAGE_URL}/${imageName}`;
-        });
+        }
 
         // 画像の更新時に古い画像を削除
         if (user?.image) {
-          await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/imageDelete`, {
-            method: "DELETE",
-            body: JSON.stringify({
-              imageName: user.image.slice((process.env.NEXT_PUBLIC_R2_IMAGE_URL?.length || 0) + 1),
-            }),
-          });
+          await deleteImage(user.image.slice((process.env.NEXT_PUBLIC_R2_IMAGE_URL?.length || 0) + 1));
         }
       }
 
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user${user ? `/${user.id}` : ""}`, {
-        method: user ? "PUT" : "POST",
-        body: JSON.stringify({ ...data, image: imagePath }),
-      }).then((res) => {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user${
+          user ? `/${user.id}` : ""
+        }`,
+        {
+          method: user ? "PUT" : "POST",
+          body: JSON.stringify({ ...data, image: imagePath }),
+        },
+      ).then((res) => {
         if (!res.ok) {
           throw new Error();
         }

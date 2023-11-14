@@ -1,21 +1,28 @@
-import { User } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 import { Button } from "@/components/Button/Button";
 import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
 export default async function UserPage({ params }: { params: { id: string } }) {
-  const { id } = params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}`, { cache: "no-store" });
-  const user: User = await res.json();
+  const user = await prisma.user.findUnique({
+    where: { id: Number(params.id) },
+  });
 
-  return (
+  return user ? (
     <div>
       <Header title={`${user.name}さんのページ`} backHref="/" />
       <Container>
         <div className="flex justify-between">
           <Button href={`/user/${params.id}/schedule`} text="スケジュール" />
         </div>
+      </Container>
+    </div>
+  ) : (
+    <div>
+      <Header title="存在しないユーザー" backHref="/" />
+      <Container>
+        <p>ユーザーが存在しません</p>
       </Container>
     </div>
   );

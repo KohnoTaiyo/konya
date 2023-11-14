@@ -1,11 +1,8 @@
-import { NextResponse } from "next/server";
-
 import { r2 } from "@/lib/r2";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-export async function POST(request: Request) {
-  const { imageName } = await request.json();
+export const uploadImage = async (file: File, imageName: string) => {
   try {
     const signedUrl = await getSignedUrl(
       r2,
@@ -16,8 +13,15 @@ export async function POST(request: Request) {
       { expiresIn: 60 },
     );
 
-    return NextResponse.json({ url: signedUrl });
+    return await fetch(signedUrl, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
   } catch (error) {
-    return NextResponse.json({ error });
+    console.log(error);
+    throw new Error("Error uploading image");
   }
-}
+};
