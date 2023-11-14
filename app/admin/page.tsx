@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { User } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 import { Icon } from "@/components/Icon/Icon";
 
 export default async function Admin() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`);
-  const users: User[] = await res.json();
+  const users = await prisma.user.findMany();
 
   return (
     <div>
