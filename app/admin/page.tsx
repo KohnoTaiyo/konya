@@ -8,8 +8,8 @@ import { Header } from "@/components/Header/Header";
 import { Icon } from "@/components/Icon/Icon";
 
 export default async function Admin() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, { next: { revalidate: 1 } });
-  const users: User[] | null = await res.json();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`);
+  const users: User[] = await res.json();
 
   return (
     <div>
@@ -24,7 +24,7 @@ export default async function Admin() {
               <p className="font-bold text-large">ユーザーの追加</p>
             </div>
           </Link>
-          {users?.map((user) => (
+          {users.map((user) => (
             <Link href={`/admin/${user.id}`} key={user.id}>
               <div className="flex flex-col gap-2 items-center p-4 shadow-md rounded-md">
                 <div className="w-full h-60 relative">
