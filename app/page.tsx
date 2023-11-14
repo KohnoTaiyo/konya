@@ -8,14 +8,14 @@ import { Header } from "@/components/Header/Header";
 
 export default async function Home() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`);
-  const users: User[] = await res.json();
+  const users: User[] = await res?.json();
 
   return (
     <div>
       <Header title="利用者選択画面" />
       <Container>
         <div className="grid grid-cols-3 gap-4">
-          {users.map((user) => (
+          {users?.map((user) => (
             <Link href={`/user/${user.id}`} key={user.id}>
               <div className="flex flex-col gap-2 items-center p-4 shadow-md rounded-md">
                 <div className="w-full h-60 relative">
