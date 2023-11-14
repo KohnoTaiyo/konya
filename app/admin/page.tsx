@@ -9,7 +9,7 @@ import { Icon } from "@/components/Icon/Icon";
 
 export default async function Admin() {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`, { next: { revalidate: 1 } });
-  const users: User[] = await res.json();
+  const users: User[] | null = await res.json();
 
   return (
     <div>
