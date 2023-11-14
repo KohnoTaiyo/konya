@@ -16,7 +16,7 @@ type UserFormInputs = {
   name: string;
 };
 
-export function UserForm({ user }: { user: User | null }) {
+export function UserForm({ user }: { user?: User | null }) {
   const [image, setImage] = useState<File>();
   const [imageUrl, setImageUrl] = useState<string>(user?.image || "");
   const [errorMessages, setErrorMessages] = useState<{ image?: string; submit?: string }>();
