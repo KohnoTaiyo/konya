@@ -7,7 +7,7 @@ import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_PREFIX}/${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user`);
   const users: User[] = await res?.json();
 
   return (
