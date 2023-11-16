@@ -56,10 +56,10 @@ export function UserForm({ user }: { user?: User | null }) {
       let imagePath: string | undefined;
       if (image && isEdit.image) {
         const imageName = crypto.randomUUID();
-        const res = await uploadImage(image, imageName);
-        if (res.ok) {
-          imagePath = `${process.env.NEXT_PUBLIC_R2_IMAGE_URL}/${imageName}`;
-        }
+        await uploadImage(image, imageName);
+        // if (res.ok) {
+        imagePath = `${process.env.NEXT_PUBLIC_R2_IMAGE_URL}/${imageName}`;
+        // }
 
         // 画像の更新時に古い画像を削除
         if (user?.image) {

@@ -12,14 +12,21 @@ export const uploadImage = async (file: File, imageName: string) => {
       }),
       { expiresIn: 3600 },
     );
+    console.log(signedUrl);
 
-    return await fetch(signedUrl, {
+    await fetch(signedUrl, {
       method: "PUT",
       body: file,
       headers: {
         "Content-Type": file.type,
       },
-    });
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   } catch (error) {
     throw new Error("Error uploading image");
   }
