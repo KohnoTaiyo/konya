@@ -1,3 +1,4 @@
+import { cache } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +7,11 @@ import { prisma } from "@/lib/prisma";
 import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
+export const revalidate = 1;
+
 export default async function Home() {
-  const users = await prisma.user.findMany();
+  const cacheUsers = cache(async () => await prisma.user.findMany());
+  const users = await cacheUsers();
 
   return (
     <div>
