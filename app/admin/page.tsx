@@ -1,3 +1,4 @@
+import { cache } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,8 +8,11 @@ import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 import { Icon } from "@/components/Icon/Icon";
 
+export const revalidate = 0;
+
 export default async function Admin() {
-  const users = await prisma.user.findMany();
+  const cacheUsers = cache(async () => await prisma.user.findMany());
+  const users = await cacheUsers();
 
   return (
     <div>

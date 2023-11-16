@@ -7,7 +7,7 @@ import { prisma } from "@/lib/prisma";
 import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
-export const revalidate = 1;
+export const revalidate = 0;
 
 export default async function Home() {
   const cacheUsers = cache(async () => await prisma.user.findMany());
