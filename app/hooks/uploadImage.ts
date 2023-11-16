@@ -19,6 +19,8 @@ export const uploadImage = async (file: File, imageName: string) => {
       body: file,
       headers: {
         "Content-Type": file.type,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "PUT",
       },
     })
       .then((res) => {
