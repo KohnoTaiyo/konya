@@ -67,15 +67,10 @@ export function UserForm({ user }: { user?: User | null }) {
         }
       }
 
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user${
-          user ? `/${user.id}` : ""
-        }`,
-        {
-          method: user ? "PUT" : "POST",
-          body: JSON.stringify({ ...data, image: imagePath }),
-        },
-      ).then((res) => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user${user ? `/${user.id}` : ""}`, {
+        method: user ? "PUT" : "POST",
+        body: JSON.stringify({ ...data, image: imagePath }),
+      }).then((res) => {
         if (!res.ok) {
           throw new Error();
         }

@@ -18,10 +18,10 @@ export default async function Admin() {
     <div>
       <Header title="管理画面" backHref="/" isHomeIcon />
       <Container>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <Link href="/admin/user">
             <div className="flex flex-col gap-2 items-center p-4 shadow-md rounded-md bg-lightGray">
-              <div className="w-full h-72 relative flex items-center justify-center">
+              <div className="w-full h-40 md:h-72 relative flex items-center justify-center">
                 <Icon type="Plus" size="large" />
               </div>
               <p className="font-bold text-large">ユーザーの追加</p>
@@ -30,7 +30,7 @@ export default async function Admin() {
           {users.map((user) => (
             <Link href={`/admin/${user.id}`} key={user.id}>
               <div className="flex flex-col gap-2 items-center p-4 shadow-md rounded-md">
-                <div className="w-full h-72 relative">
+                <div className="w-full h-40 md:h-72 relative">
                   <Image
                     src={user.image || "/images/user.png"}
                     alt={`${user.image}の画像`}
