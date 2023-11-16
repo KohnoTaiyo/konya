@@ -70,6 +70,7 @@ export function UserForm({ user }: { user?: User | null }) {
       await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/user${user ? `/${user.id}` : ""}`, {
         method: user ? "PUT" : "POST",
         body: JSON.stringify({ ...data, image: imagePath }),
+        mode: "cors",
       }).then((res) => {
         if (!res.ok) {
           throw new Error();
