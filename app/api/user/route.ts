@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import { prisma } from "@/lib/prisma";
 
-import { corsHeaders } from "../corsHeader";
+// import { corsHeaders } from "../corsHeader";
 
 export async function POST(request: Request) {
   const { name, image } = await request.json();
@@ -13,5 +13,5 @@ export async function POST(request: Request) {
       image,
     },
   });
-  return NextResponse.json(user, { headers: corsHeaders });
+  return NextResponse.json(user);
 }

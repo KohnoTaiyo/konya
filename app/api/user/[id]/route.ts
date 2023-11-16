@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { corsHeaders } from "@/api/corsHeader";
+// import { corsHeaders } from "@/api/corsHeader";
 import { prisma } from "@/lib/prisma";
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
@@ -9,5 +9,5 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     where: { id: Number(params.id) },
     data: body,
   });
-  return NextResponse.json(users, { headers: corsHeaders });
+  return NextResponse.json(users);
 }
