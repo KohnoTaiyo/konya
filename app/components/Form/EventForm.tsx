@@ -7,18 +7,18 @@ import { useRouter } from "next/navigation";
 import { deleteImage } from "@/hooks/deleteImage";
 import { resizeValidateImage } from "@/hooks/resizeValidateImage";
 import { uploadImage } from "@/hooks/uploadImage";
-import { User } from "@prisma/client";
+import { Event } from "@prisma/client";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button } from "@/components/Button/Button";
 
-type UserFormInputs = {
+type EventInputs = {
   name: string;
 };
 
-export function UserForm({ user }: { user?: User | null }) {
+export function EventForm({ event }: { event?: Event | null }) {
   const [image, setImage] = useState<File>();
-  const [imageUrl, setImageUrl] = useState<string>(user?.image || "");
+  const [imageUrl, setImageUrl] = useState<string>(event?.image || "");
   const [errorMessages, setErrorMessages] = useState<{ image?: string; submit?: string }>();
   const [isEdit, setIsEdit] = useState<{ name: boolean; image: boolean }>({ name: false, image: false });
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,14 +29,13 @@ export function UserForm({ user }: { user?: User | null }) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<UserFormInputs>({ defaultValues: { name: user?.name } });
+  } = useForm<EventInputs>({ defaultValues: { name: event?.name } });
 
-  // 名前が変更されたらisEditを更新
   const nameWatch = watch("name");
   useEffect(() => {
-    const name = user?.name ? nameWatch !== user.name : !!nameWatch;
+    const name = event?.name ? nameWatch !== event.name : !!nameWatch;
     setIsEdit((prev) => ({ ...prev, name }));
-  }, [nameWatch, user?.name]);
+  }, [nameWatch, event?.name]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files?.[0]) return;
@@ -52,11 +51,15 @@ export function UserForm({ user }: { user?: User | null }) {
     }
   };
 
-  const onSubmit: SubmitHandler<UserFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<EventInputs> = async (data) => {
     try {
+      if (!image) {
+        setErrorMessages({ image: "画像を選択してください" });
+        return;
+      }
       setIsLoading(true);
       let imagePath: string | undefined;
-      if (image && isEdit.image) {
+      if (isEdit.image) {
         const imageName = crypto.randomUUID();
         const res = await uploadImage(image, imageName);
         if (res.ok) {
@@ -66,24 +69,24 @@ export function UserForm({ user }: { user?: User | null }) {
         }
 
         // 画像の更新時に古い画像を削除
-        if (user?.image) {
-          await deleteImage(user.image.slice((process.env.NEXT_PUBLIC_R2_IMAGE_URL?.length || 0) + 1));
+        if (event?.image) {
+          await deleteImage(event.image.slice((process.env.NEXT_PUBLIC_R2_IMAGE_URL?.length || 0) + 1));
         }
       }
 
       await fetch(
-        `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/user${
-          user ? `/${user.id}` : ""
+        `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/event${
+          event ? `/${event.id}` : ""
         }`,
         {
-          method: user ? "PUT" : "POST",
+          method: event ? "PUT" : "POST",
           body: JSON.stringify({ ...data, image: imagePath }),
         },
       ).then((res) => {
         if (!res.ok) {
           throw new Error();
         }
-        router.push("/");
+        router.back();
       });
     } catch (e) {
       setErrorMessages({
@@ -98,14 +101,14 @@ export function UserForm({ user }: { user?: User | null }) {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4">
         <label htmlFor="name" className="mb-2 block">
-          名前<span className="text-red">*</span>
+          イベント名<span className="text-red">*</span>
         </label>
         <input
           type="text"
           id="name"
           className="input-text"
           {...register("name", {
-            required: "名前は必須項目です",
+            required: "イベント名は必須項目です",
             maxLength: { value: 50, message: "50文字以内で入力してください" },
           })}
         />

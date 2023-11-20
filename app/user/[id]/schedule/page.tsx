@@ -1,7 +1,12 @@
+import { prisma } from "@/lib/prisma";
+
 import { Container } from "@/components/Container/Container";
 import { Header } from "@/components/Header/Header";
 
-export default function Schedule({ params }: { params: { id: string } }) {
+export default async function Schedule({ params }: { params: { id: string } }) {
+  const user = await prisma.user.findUnique({
+    where: { id: Number(params.id) },
+  });
   const schedule = [
     {
       time: "10:00の画像",
@@ -47,9 +52,9 @@ export default function Schedule({ params }: { params: { id: string } }) {
     },
   ];
 
-  return (
+  return user ? (
     <div>
-      <Header title={`${params.id}さんのページ スケジュール`} backHref={`/user/${params.id}`} />
+      <Header title={`${user?.name}さんのページ\nスケジュール`} backHref={`/user/${params.id}`} />
       <Container>
         {schedule.length ? (
           <div className="space-y-2">
@@ -68,6 +73,13 @@ export default function Schedule({ params }: { params: { id: string } }) {
         ) : (
           <p>スケジュールが登録されていません</p>
         )}
+      </Container>
+    </div>
+  ) : (
+    <div>
+      <Header title="存在しないユーザー" backHref="/" />
+      <Container>
+        <p>ユーザーが存在しません</p>
       </Container>
     </div>
   );

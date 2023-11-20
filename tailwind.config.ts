@@ -4,7 +4,7 @@ const config: Config = {
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     fontSize: {
-      xLarge: "28px",
+      xLarge: "24px",
       large: "20px",
       small: "10px",
     },
@@ -15,6 +15,7 @@ const config: Config = {
       lightGray: "#f3f4f6",
       gray: "#d1d5db",
       red: "#ff0000",
+      skyBlue: "#22d3ee",
     },
     extend: {
       backgroundImage: {

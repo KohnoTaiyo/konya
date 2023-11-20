@@ -4,24 +4,33 @@ import cc from "classcat";
 
 import { Icon } from "@/components/Icon/Icon";
 
-export function ImageCard({ name, image, isAddType }: { name: string; image?: string; isAddType?: boolean }) {
+type ImageCardProps = {
+  name: string;
+  image?: string;
+  isAddType?: boolean;
+  isSelected?: boolean;
+};
+
+export function ImageCard(props: ImageCardProps) {
   const imageCardClass = cc([
-    "p-2 shadow-md rounded-md w-28",
+    "p-2 shadow-md rounded-md w-full",
     {
-      "bg-lightGray": isAddType,
+      "bg-lightGray": props.isAddType,
+      "border-2 border-red": props.isSelected,
     },
   ]);
   return (
     <div className={imageCardClass}>
       <div className="w-full h-20 relative mb-2 flex items-center justify-center">
-        {isAddType ? (
+        {props.isAddType ? (
           <Icon type="Plus" size="large" />
         ) : (
-          image && <Image src={image} alt="" fill style={{ objectFit: "cover" }} sizes="100%" />
+          props.image && (
+            <Image src={props.image} alt={`${props.name}の画像`} fill style={{ objectFit: "cover" }} sizes="100%" />
+          )
         )}
-        {/* <Image src={image} alt="" fill style={{ objectFit: "cover" }} sizes="100%" /> */}
       </div>
-      <p className="text-center">{name}</p>
+      <p className="text-center">{props.name}</p>
     </div>
   );
 }

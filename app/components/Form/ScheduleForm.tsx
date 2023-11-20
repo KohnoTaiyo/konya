@@ -3,6 +3,9 @@
 // import { useEffect, useState } from "react";
 // import Image from "next/image";
 // import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
+import Link from "next/link";
+
 import { TIMES } from "@/contents/times";
 // import { resizeValidateImage } from "@/hooks/resizeValidateImage";
 import { Event } from "@prisma/client";
@@ -13,9 +16,11 @@ import { ImageCard } from "@/components/ImageCard/ImageCard";
 
 type UserFormInputs = {
   time: string;
+  eventId: number;
 };
 
 export function ScheduleForm({ events }: { events: Event[] }) {
+  const [selectedEventId, setSelectedEventId] = useState<number>();
   // const [image, setImage] = useState<File>();
   // const [imageUrl, setImageUrl] = useState<string>(user?.image || "");
   // const [errorMessages, setErrorMessages] = useState<{ image?: string; submit?: string }>();
@@ -27,6 +32,10 @@ export function ScheduleForm({ events }: { events: Event[] }) {
     handleSubmit,
     formState: { errors },
   } = useForm<UserFormInputs>();
+
+  const handleClick = useCallback((id: number) => setSelectedEventId(id), []);
+
+  console.log(selectedEventId);
 
   const onSubmit: SubmitHandler<UserFormInputs> = async (data) => {
     console.log(data);
@@ -95,10 +104,17 @@ export function ScheduleForm({ events }: { events: Event[] }) {
         </select>
         {errors.time && <p className="text-red">{errors.time.message}</p>}
       </div>
-      <div className="flex flex-wrap gap-4">
-        <ImageCard name="イベント追加" isAddType />
-        {events.map((event) => (
-          <ImageCard key={event.id} name={event.name} image={event.image} />
+      <label htmlFor="image" className="mb-2 block">
+        イベント名<span className="text-red">*</span>
+      </label>
+      <div className="grid grid-cols-3 gap-4">
+        <Link href="/admin/event/new">
+          <ImageCard name="イベント追加" isAddType />
+        </Link>
+        {events.map((event, i) => (
+          <div key={event.id} onClick={() => handleClick(event.id)}>
+            <ImageCard name={event.name} image={event.image} isSelected={i + 1 === selectedEventId} />
+          </div>
         ))}
       </div>
       {/* <label htmlFor="image" className="inline-block">

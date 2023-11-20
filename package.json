@@ -25,6 +25,7 @@
     "@prisma/client": "5.5.2",
     "browser-image-compression": "^2.0.2",
     "next": "14.0.0",
+    "next-nprogress-bar": "^2.1.2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",

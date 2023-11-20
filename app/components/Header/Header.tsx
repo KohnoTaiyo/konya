@@ -12,7 +12,7 @@ export function Header({ title, backHref, isHomeIcon }: { title: string; backHre
           </Link>
         )}
       </span>
-      <h1 className="text-2xl font-bold text-xLarge flex-1">{title}</h1>
+      <h1 className="text-xLarge font-bold flex-1 whitespace-pre-wrap">{title}</h1>
       <span className="w-8 h-8">
         {isHomeIcon ? (
           <Link href="/">

@@ -10,25 +10,13 @@ export const uploadImage = async (file: File, imageName: string) => {
         Bucket: process.env.NEXT_PUBLIC_R2_BUCKET,
         Key: imageName,
       }),
-      { expiresIn: 3600 },
+      { expiresIn: 60 },
     );
-    console.log(signedUrl);
 
-    await fetch(signedUrl, {
+    return await fetch(signedUrl, {
       method: "PUT",
       body: file,
-      headers: {
-        "Content-Type": file.type,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "PUT",
-      },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    });
   } catch (error) {
     throw new Error("Error uploading image");
   }
