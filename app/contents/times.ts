@@ -1,194 +1,194 @@
 export const TIMES = [
   {
-    name: "0時",
+    name: "000",
     image: "/images/time/clock_1200.png",
   },
   {
-    name: "0時30分",
+    name: "030",
     image: "/images/time/clock_1230.png",
   },
   {
-    name: "1時",
+    name: "100",
     image: "/images/time/clock_0100.png",
   },
   {
-    name: "1時30分",
+    name: "130",
     image: "/images/time/clock_0130.png",
   },
   {
-    name: "2時",
+    name: "200",
     image: "/images/time/clock_0200.png",
   },
   {
-    name: "2時30分",
+    name: "230",
     image: "/images/time/clock_0230.png",
   },
   {
-    name: "3時",
+    name: "300",
     image: "/images/time/clock_0300.png",
   },
   {
-    name: "3時30分",
+    name: "330",
     image: "/images/time/clock_0330.png",
   },
   {
-    name: "4時",
+    name: "400",
     image: "/images/time/clock_0400.png",
   },
   {
-    name: "4時30分",
+    name: "430",
     image: "/images/time/clock_0430.png",
   },
   {
-    name: "5時",
+    name: "500",
     image: "/images/time/clock_0500.png",
   },
   {
-    name: "5時30分",
+    name: "530",
     image: "/images/time/clock_0530.png",
   },
   {
-    name: "6時",
+    name: "600",
     image: "/images/time/clock_0600.png",
   },
   {
-    name: "6時30分",
+    name: "630",
     image: "/images/time/clock_0630.png",
   },
   {
-    name: "7時",
+    name: "700",
     image: "/images/time/clock_0700.png",
   },
   {
-    name: "7時30分",
+    name: "730",
     image: "/images/time/clock_0730.png",
   },
   {
-    name: "8時",
+    name: "800",
     image: "/images/time/clock_0800.png",
   },
   {
-    name: "8時30分",
+    name: "830",
     image: "/images/time/clock_0830.png",
   },
   {
-    name: "9時",
+    name: "900",
     image: "/images/time/clock_0900.png",
   },
   {
-    name: "9時30分",
+    name: "930",
     image: "/images/time/clock_0930.png",
   },
   {
-    name: "10時",
+    name: "1000",
     image: "/images/time/clock_1000.png",
   },
   {
-    name: "10時30分",
+    name: "1030",
     image: "/images/time/clock_1030.png",
   },
   {
-    name: "11時",
+    name: "1100",
     image: "/images/time/clock_1100.png",
   },
   {
-    name: "11時30分",
+    name: "1130",
     image: "/images/time/clock_1130.png",
   },
   {
-    name: "12時",
+    name: "1200",
     image: "/images/time/clock_1200.png",
   },
   {
-    name: "12時30分",
+    name: "1230",
     image: "/images/time/clock_1230.png",
   },
   {
-    name: "13時",
+    name: "1300",
     image: "/images/time/clock_0100.png",
   },
   {
-    name: "13時30分",
+    name: "1330",
     image: "/images/time/clock_0130.png",
   },
   {
-    name: "14時",
+    name: "1400",
     image: "/images/time/clock_0200.png",
   },
   {
-    name: "14時30分",
+    name: "1430",
     image: "/images/time/clock_0230.png",
   },
   {
-    name: "15時",
+    name: "1500",
     image: "/images/time/clock_0300.png",
   },
   {
-    name: "15時30分",
+    name: "1530",
     image: "/images/time/clock_0330.png",
   },
   {
-    name: "16時",
+    name: "1600",
     image: "/images/time/clock_0400.png",
   },
   {
-    name: "16時30分",
+    name: "1630",
     image: "/images/time/clock_0430.png",
   },
   {
-    name: "17時",
+    name: "1700",
     image: "/images/time/clock_0500.png",
   },
   {
-    name: "17時30分",
+    name: "1730",
     image: "/images/time/clock_0530.png",
   },
   {
-    name: "18時",
+    name: "1800",
     image: "/images/time/clock_0600.png",
   },
   {
-    name: "18時30分",
+    name: "1830",
     image: "/images/time/clock_0630.png",
   },
   {
-    name: "19時",
+    name: "1900",
     image: "/images/time/clock_0700.png",
   },
   {
-    name: "19時30分",
+    name: "1930",
     image: "/images/time/clock_0730.png",
   },
   {
-    name: "20時",
+    name: "2000",
     image: "/images/time/clock_0800.png",
   },
   {
-    name: "20時30分",
+    name: "2030",
     image: "/images/time/clock_0830.png",
   },
   {
-    name: "21時",
+    name: "2100",
     image: "/images/time/clock_0900.png",
   },
   {
-    name: "21時30分",
+    name: "2130",
     image: "/images/time/clock_0930.png",
   },
   {
-    name: "22時",
+    name: "2200",
     image: "/images/time/clock_1000.png",
   },
   {
-    name: "22時30分",
+    name: "2230",
     image: "/images/time/clock_1030.png",
   },
   {
-    name: "23時",
+    name: "2300",
     image: "/images/time/clock_1100.png",
   },
   {
-    name: "23時30分",
+    name: "2330",
     image: "/images/time/clock_1130.png",
   },
 ];

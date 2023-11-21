@@ -76,7 +76,7 @@ export function UserForm({ user }: { user?: User | null }) {
           user ? `/${user.id}` : ""
         }`,
         {
-          method: user ? "PUT" : "POST",
+          method: user ? "PATCH" : "POST",
           body: JSON.stringify({ ...data, image: imagePath }),
         },
       ).then((res) => {

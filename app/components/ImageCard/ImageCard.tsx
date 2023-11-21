@@ -15,8 +15,8 @@ export function ImageCard(props: ImageCardProps) {
   const imageCardClass = cc([
     "p-2 shadow-md rounded-md w-full",
     {
-      "bg-lightGray": props.isAddType,
-      "border-2 border-red": props.isSelected,
+      "bg-secondary text-white": props.isAddType,
+      "shadow-inner bg-gray": props.isSelected,
     },
   ]);
   return (

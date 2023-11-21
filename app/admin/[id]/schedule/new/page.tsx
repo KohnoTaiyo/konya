@@ -13,7 +13,7 @@ export default async function UserAddSchedule({ params }: { params: { id: string
     <div>
       <Header title="スケジュール追加画面" backHref={`/admin/${params.id}/schedule`} isHomeIcon />
       <Container>
-        <ScheduleForm events={events} />
+        <ScheduleForm events={events} userId={params.id} />
       </Container>
     </div>
   );
