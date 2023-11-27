@@ -36,7 +36,7 @@ export function EventList({ events }: { events: Events }) {
 
   const onDeleteList = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/eventUserDay`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventUserDay`, {
         method: "PATCH",
         body: JSON.stringify({ ids: completeIds }),
       }).then((res) => {
@@ -54,7 +54,7 @@ export function EventList({ events }: { events: Events }) {
 
   const onCompleteEventUserDay = async (id: number) => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/eventUserDay/${id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventUserDay/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ isDone: true }),
       }).then((res) => {

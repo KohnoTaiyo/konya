@@ -74,15 +74,10 @@ export function EventForm({ event }: { event?: Event | null }) {
         }
       }
 
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/event${
-          event ? `/${event.id}` : ""
-        }`,
-        {
-          method: event ? "PATCH" : "POST",
-          body: JSON.stringify({ ...data, image: imagePath }),
-        },
-      ).then((res) => {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/event${event ? `/${event.id}` : ""}`, {
+        method: event ? "PATCH" : "POST",
+        body: JSON.stringify({ ...data, image: imagePath }),
+      }).then((res) => {
         if (!res.ok) {
           throw new Error();
         }

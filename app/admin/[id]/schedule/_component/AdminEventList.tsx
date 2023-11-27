@@ -36,7 +36,7 @@ export function AdminEventList({ events }: { events: Events }) {
 
   const onDeleteList = async () => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/eventUserDay`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventUserDay`, {
         method: "DELETE",
         body: JSON.stringify({ ids: deleteIds }),
       }).then((res) => {
@@ -54,7 +54,7 @@ export function AdminEventList({ events }: { events: Events }) {
 
   const onDeleteEventUserDay = async (id: number) => {
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_PREFIX}${process.env.NEXT_PUBLIC_VERCEL_URL}/api/eventUserDay/${id}`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/eventUserDay/${id}`, {
         method: "DELETE",
       }).then((res) => {
         if (!res.ok) {
