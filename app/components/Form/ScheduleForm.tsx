@@ -19,6 +19,7 @@ type UserFormInputs = {
 export function ScheduleForm({ events, userId }: { events: Event[]; userId: string }) {
   const [selectedEventId, setSelectedEventId] = useState<number>();
   const [errorMessages, setErrorMessages] = useState<{ eventId?: string; submit?: string }>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const {
@@ -32,13 +33,14 @@ export function ScheduleForm({ events, userId }: { events: Event[]; userId: stri
   const handleClick = useCallback((id: number) => setSelectedEventId(id), []);
 
   const onSubmit: SubmitHandler<UserFormInputs> = async (data) => {
+    setIsLoading(true);
     if (!selectedEventId) {
       setErrorMessages({ eventId: "イベントを選択してください" });
       return;
     }
 
     try {
-      const postData: Omit<EventUserDay, "id" | "updatedAt" | "createdAt"> = {
+      const postData: Pick<EventUserDay, "eventId" | "userId" | "time"> = {
         eventId: selectedEventId,
         userId: Number(userId),
         time: data.time,
@@ -57,6 +59,8 @@ export function ScheduleForm({ events, userId }: { events: Event[]; userId: stri
       setErrorMessages({
         submit: "登録に失敗しました。少し時間をおいて再度お試しくいただくか、管理者にお問い合わせください。",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -91,7 +95,12 @@ export function ScheduleForm({ events, userId }: { events: Event[]; userId: stri
       </div>
       {errorMessages?.eventId && <p className="text-red mt-2">{errorMessages.eventId}</p>}
       <div className="mt-8">
-        <Button text="送信" size="small" type="submit" disabled={!timeWatch || !selectedEventId} />
+        <Button
+          text={isLoading ? "送信中..." : "送信"}
+          size="small"
+          type="submit"
+          disabled={!timeWatch || !selectedEventId || isLoading}
+        />
         {errorMessages?.submit && <p className="text-red mt-2">{errorMessages.submit}</p>}
       </div>
     </form>

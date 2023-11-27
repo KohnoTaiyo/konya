@@ -53,13 +53,13 @@ export function EventForm({ event }: { event?: Event | null }) {
 
   const onSubmit: SubmitHandler<EventInputs> = async (data) => {
     try {
-      if (!image) {
+      if (!imageUrl) {
         setErrorMessages({ image: "画像を選択してください" });
         return;
       }
       setIsLoading(true);
       let imagePath: string | undefined;
-      if (isEdit.image) {
+      if (isEdit.image && image) {
         const imageName = crypto.randomUUID();
         const res = await uploadImage(image, imageName);
         if (res.ok) {
@@ -79,7 +79,7 @@ export function EventForm({ event }: { event?: Event | null }) {
           event ? `/${event.id}` : ""
         }`,
         {
-          method: event ? "PUT" : "POST",
+          method: event ? "PATCH" : "POST",
           body: JSON.stringify({ ...data, image: imagePath }),
         },
       ).then((res) => {

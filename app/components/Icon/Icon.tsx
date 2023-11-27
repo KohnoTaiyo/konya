@@ -1,7 +1,7 @@
 import cc from "classcat";
-import { ChevronLeft, Home, Plus, Settings, User } from "tabler-icons-react";
+import { ChevronLeft, Circle, Home, Plus, Settings, User, X } from "tabler-icons-react";
 
-export type IconType = "ChevronLeft" | "Home" | "Plus" | "Settings" | "User";
+export type IconType = "ChevronLeft" | "Circle" | "Home" | "Plus" | "Settings" | "User" | "X";
 
 type IconProps = {
   type: IconType;
@@ -29,6 +29,8 @@ export function Icon(props: IconProps) {
     switch (type) {
       case "ChevronLeft":
         return <ChevronLeft className={cc([iconColor, iconSize])} />;
+      case "Circle":
+        return <Circle className={cc([iconColor, iconSize])} />;
       case "Home":
         return <Home className={cc([iconColor, iconSize])} />;
       case "Plus":
@@ -37,6 +39,8 @@ export function Icon(props: IconProps) {
         return <Settings className={cc([iconColor, iconSize])} />;
       case "User":
         return <User className={cc([iconColor, iconSize])} />;
+      case "X":
+        return <X className={cc([iconColor, iconSize])} />;
     }
   };
 
